@@ -1,4 +1,4 @@
-const publicVapidKey = 'BKH3LndHnvOeW9jSTb9B0LAa7gzj2jJXepSf96l8fu2lMZ6TMOIy3YlsGM85F7mUmk2f4qlX-ei-uadnNlBZqfI'
+const publicVapidKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
 const urlBase64ToUint8Array = base64String => {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
