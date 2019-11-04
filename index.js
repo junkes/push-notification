@@ -25,7 +25,7 @@ if ( !fs.existsSync('./data/subscriptions.json') ) {
         let subscriptionsFile = fs.readFileSync('./data/subscriptions.json')
         let subscriptionsObject = JSON.parse(subscriptionsFile)
         let time = new Date()
-        const message = JSON.stringify({ title: 'Meu Sistema - Hora Certa:', 'body': `Agora são ${time.getHours()}:${time.getMinutes()}` })
+        const message = JSON.stringify({ title: 'My WebApp - Current Time', 'body': `${time.getHours()}:${time.getMinutes()}` })
         for ( p256dh in subscriptionsObject ) {
             let subscription  = subscriptionsObject[p256dh]            
             delete subscription.time
@@ -56,7 +56,7 @@ app.post('/subscribe', (req, res) => {
     fs.writeFileSync('./data/subscriptions.json', subscriptionsFile)
     res.status(201).json(subscription)
     delete subscription.time
-    const initialMessage = JSON.stringify({ title: 'Meu Sistema', 'body': 'Thank you for your subscription! :)' })
+    const initialMessage = JSON.stringify({ title: 'My WebApp', 'body': 'Thank you for your subscription! :)' })
     sendNotification(subscription, initialMessage)
 })
 
