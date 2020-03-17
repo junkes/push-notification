@@ -6,11 +6,13 @@ const fs = require('fs')
 const app = express()
 
 // Keys generateds by webpush 
-const publicVapidKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-const privateVapidKey = 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
+const publicVapidKey = 'BIuz5ZRbVqHz9q1KY5_GrRJfAzgqGNyrFO9Lqq40L9GRM1UtUjCotSjofNBoXw9bN-Mb84KzmWQZkZhqf8ifdl4'
+const privateVapidKey = 'NYtqjIE0WoPLNfLCb5Z_yLKgO8_pMZpm6_wQEHJfEGU'
 
 const sendNotification = (subscription, message) => {
-    webpush.sendNotification(subscription, message).catch(err => console.error(err))
+    webpush.sendNotification(subscription, message).then(
+        event => console.log(event)
+    ).catch(err => console.error(err))
 }
 
 if ( !fs.existsSync('./data/subscriptions.json') ) {
@@ -56,9 +58,11 @@ app.post('/subscribe', (req, res) => {
     fs.writeFileSync('./data/subscriptions.json', subscriptionsFile)
     res.status(201).json(subscription)
     delete subscription.time
-    const initialMessage = JSON.stringify({ title: 'My WebApp', 'body': 'Thank you for your subscription! :)' })
+    const initialMessage = JSON.stringify({ 'title': 'My WebApp', 'body': 'Thank you for your subscription! :)' })
     sendNotification(subscription, initialMessage)
 })
 
-app.listen('3003', () => console.log('listening on port 3003'))
+const port = 8080
+
+app.listen(port, () => console.log(`listening on port ${port}`))
 
